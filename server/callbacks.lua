@@ -2,7 +2,7 @@ function RegisterCallbacks()
 	exports["pulsar-core"]:RegisterServerCallback("Mechanic:InstallMultipleRepairParts", function(source, data, cb)
 		local char = exports['pulsar-characters']:FetchCharacterSource(source)
 		if char and data?.part and data?.quantity and _mechanicItemsToParts[data.part] then
-			if exports.ox_inventory:ItemsHas(char:GetData("SID"), 1, data.part, data.quantity) then
+			if exports.ox_inventory:ItemsHas(char:GetData("SID"), data.part, data.quantity) then
 				exports["pulsar-core"]:ClientCallback(source, "Mechanic:StartInstall", data, function(success)
 					if success then
 						exports.ox_inventory:Remove(char:GetData("SID"), 1, data.part, data.quantity)
